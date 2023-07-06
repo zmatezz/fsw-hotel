@@ -1,4 +1,5 @@
 import React from 'react'
+import Trips from './components/Trips';
 
 export const metadata = {
   title: "About",
@@ -6,7 +7,7 @@ export const metadata = {
 
 const Page = () => {
   return (
-    <div>page</div>
+    <div><Trips/></div>
   )
 }
 

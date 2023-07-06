@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Trips = () => {
+  
   return (
     <div>Trips</div>
   )
 }
 
-export default Trips;
+export default Trips
