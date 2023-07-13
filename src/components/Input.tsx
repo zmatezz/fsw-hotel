@@ -11,9 +11,9 @@ function Input(
   ref: LegacyRef<HTMLInputElement> | undefined
 ) {
   const inputClassName = twMerge(
-    className,
-    "rounded-lg border border-gray-300 bg-white p-2 text-sm font-normal text-dark placeholder-black placeholder-opacity-20 outline-none transition-all",
-    error ? "border-red-500" : "focus:ring-1 focus:ring-primary"
+    "rounded-lg border border-gray-300 bg-white p-2 text-sm font-normal text-primaryDarker placeholder-black placeholder-opacity-20 outline-none transition-all",
+    error ? "border-red-500" : "focus:ring-1 focus:ring-primary",
+    className
   );
 
   return (
