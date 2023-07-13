@@ -1,12 +1,13 @@
 import { LegacyRef, forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
-import DatePicker, {
+import _DatePicker, {
   ReactDatePickerProps,
   registerLocale,
 } from "react-datepicker";
 import ptBR from "date-fns/locale/pt-BR";
 
 import "react-datepicker/dist/react-datepicker.css";
+import { Input } from "postcss";
 
 registerLocale("pt-BR", ptBR);
 
@@ -15,22 +16,22 @@ interface InputProps extends ReactDatePickerProps {
   errorMessage?: string;
 }
 
-function Input(
+function DatePicker(
   { className, error, errorMessage, ...props }: InputProps,
   ref: LegacyRef<HTMLInputElement> | undefined
 ) {
-  const inputClassName = twMerge(
+  const datePickerClassName = twMerge(
     className,
-    "rounded-lg border border-gray-300 bg-white p-2 text-sm font-normal text-dark placeholder-black placeholder-opacity-20 outline-none transition-all focus:ring-1 focus:ring-primary",
+    "rounded-lg border border-gray-300 bg-white p-2 text-sm font-normal text-primaryDarker placeholder-black placeholder-opacity-20 outline-none transition-all focus:ring-1 focus:ring-primary",
     error ? "border-red-500" : ""
   );
 
   return (
     <div className="flex w-full flex-col">
-      <DatePicker
+      <_DatePicker
         locale="pt-BR"
         wrapperClassName="w-full"
-        className={inputClassName}
+        className={datePickerClassName}
         enableTabLoop={false}
         {...props}
       />
@@ -41,4 +42,4 @@ function Input(
   );
 }
 
-export default forwardRef(Input);
+export default forwardRef(DatePicker);
