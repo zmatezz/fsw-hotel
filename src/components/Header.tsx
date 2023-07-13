@@ -15,10 +15,10 @@ const header = () => {
   const handleLogoutClick = () => {
     setMenuIsOpen(false);
     signOut();
-  }
-  
-  const handleMenuClick = () =>  setMenuIsOpen(!menuIsOpen);
-  
+  };
+
+  const handleMenuClick = () => setMenuIsOpen(!menuIsOpen);
+
   return (
     <div className="container mx-auto p-5 py-0 h-[93px] flex justify-between items-center">
       <div className="relative h-[32px] w-[182px]">
@@ -36,7 +36,11 @@ const header = () => {
 
       {status === "authenticated" && data.user && (
         <div className="flex items-center gap-3 border-grayLighter border border-solid rounded-full p-2 px-3 relative">
-          <AiOutlineMenu size={16} onClick={handleMenuClick} className="cursor-pointer"/>
+          <AiOutlineMenu
+            size={16}
+            onClick={handleMenuClick}
+            className="cursor-pointer"
+          />
 
           <Image
             width={35}
