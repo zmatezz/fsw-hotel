@@ -136,6 +136,7 @@ async function main() {
           "Luxuoso",
         ],
         recommended: false,
+        maxGuests: 5,
       },
       {
         name: "Mountain Peak Lodge",
@@ -162,6 +163,7 @@ async function main() {
           "Luxuoso",
         ],
         recommended: false,
+        maxGuests: 5,
       },
       {
         name: "Encanto da Serra",
@@ -188,6 +190,7 @@ async function main() {
           "Luxuoso",
         ],
         recommended: false,
+        maxGuests: 5,
       },
       {
         name: "Rancho Sereno",
@@ -214,6 +217,7 @@ async function main() {
           "Luxuoso",
         ],
         recommended: false,
+        maxGuests: 5,
       },
       {
         name: "Chalé Serenidade",
@@ -240,6 +244,7 @@ async function main() {
           "Luxuoso",
         ],
         recommended: false,
+        maxGuests: 5,
       },
     ],
   });
