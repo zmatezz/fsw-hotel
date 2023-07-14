@@ -1,3 +1,5 @@
+import TripItem from "@/components/TripItem";
+import { Trip } from "@prisma/client";
 import React from "react";
 
 const RecommendedTrips = async () => {
@@ -15,9 +17,11 @@ const RecommendedTrips = async () => {
         <div className="w-full h-[1px] bg-grayLighter"></div>
       </div>
 
-      {data.map((trip) => (
-        <img key={trip.id} src={trip.coverImage} alt="asas" />
+      <div className="flex flex-col items-center mt-5 gap-5">
+      {data.map((trip: Trip) => (
+       <TripItem key={trip.id} trip={trip}/>
       ))}
+      </div>
     </div>
   );
 };
