@@ -9,13 +9,18 @@ interface TripItemProps {
 const TripItem = ({ trip }: TripItemProps) => {
   return (
     <div className="flex flex-col">
+      <div className="relative h-[280px] w-[280px]">
       <Image
         src={trip.coverImage}
-        width={280}
-        height={280}
+        style={{
+          objectFit: "cover",
+        }
+        }
+        fill
         className="rounded-lg shadow-md"
         alt={trip.name}
       />
+      </div>
 
       <h3 className="text-primaryDarker font-medium text-sm mt-2">
         {trip.name}
