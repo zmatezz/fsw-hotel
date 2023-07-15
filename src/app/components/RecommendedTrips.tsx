@@ -6,7 +6,7 @@ import React from "react";
 
 async function getTrips() {
   const trips = await prisma.trip.findMany({});
-  
+
   return trips;
 }
 
