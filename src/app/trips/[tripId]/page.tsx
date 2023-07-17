@@ -26,7 +26,8 @@ const TripDetails = async ({ params }: { params: { tripId: string } }) => {
     <div className="container mx-auto">
 
     <TripHeader trip={trip}/>
-    <TripReservation />
+    <TripReservation trip={trip}/>
+    
     </div>
   );
 };

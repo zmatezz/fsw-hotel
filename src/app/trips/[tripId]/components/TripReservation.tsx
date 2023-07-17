@@ -1,19 +1,35 @@
-'use client';
+"use client";
 
-import DatePicker from '@/components/DatePicker'
-import React from 'react'
+import DatePicker from "@/components/DatePicker";
+import Input from "@/components/Input";
+import { Trip } from "@prisma/client";
+import React from "react";
 
-const TripReservation = () => {
-  return (
-    <div>
-      <div className="flex flex-col">
-        <div className="flex">
-          <DatePicker placeholderText='Data de Início' onChange={() => {}} />
-          <DatePicker placeholderText='Data Final' onChange={() => {}} />
-        </div>
-      </div>
-    </div>
-  )
+interface TripReservationProps {
+  trip: Trip
 }
 
-export default TripReservation
+const TripReservation = ({ trip }: TripReservationProps) => {
+  return (
+    <div>
+      <div className="flex flex-col px-5">
+        <div className="flex gap-4">
+          <DatePicker
+            placeholderText="Data de Início"
+            onChange={() => {}}
+            className="w-full"
+          />
+          <DatePicker
+            placeholderText="Data Final"
+            onChange={() => {}}
+            className="w-full"
+          />
+        </div>
+
+        <Input placeholder={`Número de Hóspedes (max: ${trip.maxGuests})`} className="mt-4" />
+      </div>
+    </div>
+  );
+};
+
+export default TripReservation;
