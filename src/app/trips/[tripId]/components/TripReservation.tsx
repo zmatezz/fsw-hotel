@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "@/components/Button";
 import DatePicker from "@/components/DatePicker";
 import Input from "@/components/Input";
 import { Trip } from "@prisma/client";
@@ -27,6 +28,13 @@ const TripReservation = ({ trip }: TripReservationProps) => {
         </div>
 
         <Input placeholder={`Número de Hóspedes (max: ${trip.maxGuests})`} className="mt-4" />
+
+        <div className="flex justify-between mt-3">
+          <p className="font-medium text-sm text-primaryDarker">Total: </p>
+          <p className="font-medium text-sm text-primaryDarker">R$2500 </p>
+        </div>
+
+        <Button className="mt-3">Reservar agora</Button>
       </div>
     </div>
   );
