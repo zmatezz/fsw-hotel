@@ -5,7 +5,7 @@ import DatePicker from "@/components/DatePicker";
 import Input from "@/components/Input";
 import { Trip } from "@prisma/client";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 interface TripReservationProps {
   trip: Trip;
@@ -13,6 +13,9 @@ interface TripReservationProps {
 
 interface TripReservationForm {
   guests: number;
+  startDate: Date | null;
+  endDate: Date | null;
+
 }
 
 const TripReservation = ({ trip }: TripReservationProps) => {
@@ -20,6 +23,7 @@ const TripReservation = ({ trip }: TripReservationProps) => {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm<TripReservationForm>();
 
   const onSubmit = (data: any) => {
@@ -29,16 +33,48 @@ const TripReservation = ({ trip }: TripReservationProps) => {
   return (
     <div className="flex flex-col px-5">
       <div className="flex gap-4">
-        <DatePicker
-          placeholderText="Data de Início"
-          onChange={() => {}}
-          className="w-full"
+        <Controller
+          name="startDate"
+          rules={{
+            required: {
+              value: true,
+              message: "Data inicial é obrigatória",
+            },
+          }}
+          control={control}
+          render={({ field }) => (
+            <DatePicker
+            error={!!errors?.startDate}
+            errorMessage={errors?.startDate?.message}
+              onChange={field.onChange}
+              selected={field.value}
+              placeholderText="Data de Início"
+              className="w-full"
+            />
+          )}
         />
-        <DatePicker
-          placeholderText="Data Final"
-          onChange={() => {}}
-          className="w-full"
+
+<Controller
+          name="endDate"
+          rules={{
+            required: {
+              value: true,
+              message: "Data Final é obrigatória",
+            },
+          }}
+          control={control}
+          render={({ field }) => (
+            <DatePicker
+            error={!!errors?.endDate}
+            errorMessage={errors?.endDate?.message}
+              onChange={field.onChange}
+              selected={field.value}
+              placeholderText="Data Final"
+              className="w-full"
+            />
+          )}
         />
+
       </div>
 
       <Input
