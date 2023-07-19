@@ -17,20 +17,27 @@ interface TripReservationForm {
   guests: number;
   startDate: Date | null;
   endDate: Date | null;
-
 }
 
-const TripReservation = ({ maxGuests, tripStartDate, tripEndDate }: TripReservationProps) => {
+const TripReservation = ({
+  maxGuests,
+  tripStartDate,
+  tripEndDate,
+}: TripReservationProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
+    watch,
+
   } = useForm<TripReservationForm>();
 
   const onSubmit = (data: any) => {
     console.log({ data });
   };
+
+  const startDate = watch("startDate");
 
   return (
     <div className="flex flex-col px-5">
@@ -46,8 +53,8 @@ const TripReservation = ({ maxGuests, tripStartDate, tripEndDate }: TripReservat
           control={control}
           render={({ field }) => (
             <DatePicker
-            error={!!errors?.startDate}
-            errorMessage={errors?.startDate?.message}
+              error={!!errors?.startDate}
+              errorMessage={errors?.startDate?.message}
               onChange={field.onChange}
               selected={field.value}
               placeholderText="Data de Início"
@@ -57,7 +64,7 @@ const TripReservation = ({ maxGuests, tripStartDate, tripEndDate }: TripReservat
           )}
         />
 
-<Controller
+        <Controller
           name="endDate"
           rules={{
             required: {
@@ -68,17 +75,17 @@ const TripReservation = ({ maxGuests, tripStartDate, tripEndDate }: TripReservat
           control={control}
           render={({ field }) => (
             <DatePicker
-            error={!!errors?.endDate}
-            errorMessage={errors?.endDate?.message}
+              error={!!errors?.endDate}
+              errorMessage={errors?.endDate?.message}
               onChange={field.onChange}
               selected={field.value}
               placeholderText="Data Final"
               className="w-full"
               maxDate={tripEndDate}
+              minDate={startDate ?? tripStartDate}
             />
           )}
         />
-
       </div>
 
       <Input
