@@ -8,7 +8,9 @@ import React from "react";
 import { Controller, useForm } from "react-hook-form";
 
 interface TripReservationProps {
-  trip: Trip;
+  tripStartDate: Date;
+  tripEndDate: Date;
+  maxGuests: number;
 }
 
 interface TripReservationForm {
@@ -18,7 +20,7 @@ interface TripReservationForm {
 
 }
 
-const TripReservation = ({ trip }: TripReservationProps) => {
+const TripReservation = ({ maxGuests, tripStartDate, tripEndDate }: TripReservationProps) => {
   const {
     register,
     handleSubmit,
@@ -50,6 +52,7 @@ const TripReservation = ({ trip }: TripReservationProps) => {
               selected={field.value}
               placeholderText="Data de Início"
               className="w-full"
+              minDate={tripStartDate}
             />
           )}
         />
@@ -71,6 +74,7 @@ const TripReservation = ({ trip }: TripReservationProps) => {
               selected={field.value}
               placeholderText="Data Final"
               className="w-full"
+              maxDate={tripEndDate}
             />
           )}
         />
@@ -84,7 +88,7 @@ const TripReservation = ({ trip }: TripReservationProps) => {
             message: "Número de hóspedes é obrigatório",
           },
         })}
-        placeholder={`Número de Hóspedes (max: ${trip.maxGuests})`}
+        placeholder={`Número de Hóspedes (max: ${maxGuests})`}
         className="mt-4"
         error={!!errors?.guests}
         errorMessage={errors?.guests?.message}
