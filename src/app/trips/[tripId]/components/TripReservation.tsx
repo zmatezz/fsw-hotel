@@ -3,7 +3,6 @@
 import Button from "@/components/Button";
 import DatePicker from "@/components/DatePicker";
 import Input from "@/components/Input";
-import { Trip } from "@prisma/client";
 import { differenceInDays } from "date-fns";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -22,19 +21,14 @@ interface TripReservationForm {
   endDate: Date | null;
 }
 
-const TripReservation = ({
-  tripId,
-  maxGuests,
-  tripStartDate,
-  tripEndDate,
-  pricePerDay,
-}: TripReservationProps) => {
+const TripReservation = ({ tripId, maxGuests, tripStartDate, tripEndDate, pricePerDay }: TripReservationProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
     watch,
+    setError,
   } = useForm<TripReservationForm>();
 
   const onSubmit = async (data: TripReservationForm) => {
@@ -50,7 +44,17 @@ const TripReservation = ({
     });
     const res = await response.json();
 
-    console.log({ res });
+    if (res?.error?.code === "TRIP_ALREADY_RESERVED") {
+      setError("startDate", {
+        type: "manual",
+        message: "Esta data já está reservada.",
+      });
+
+      return setError("endDate", {
+        type: "manual",
+        message: "Esta data já está reservada.",
+      });
+    }
   };
 
   const startDate = watch("startDate");
