@@ -39,6 +39,7 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
 
   const startDate = new Date(searchParams.get("startDate") as string);
   const endDate = new Date(searchParams.get("endDate") as string);
+  const guests = searchParams.get("guests");
 
   return (
     <div className="container mx-auto p-5">
@@ -85,6 +86,9 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
         {" - "}
         <p>{format(endDate, "dd 'de' MMMM", { locale: ptBR })}</p>
         </div>
+
+        <h3 className="font-semibold mt-5">Hóspedes</h3>
+        <p>{guests}</p>
       </div>
     </div>
   );
