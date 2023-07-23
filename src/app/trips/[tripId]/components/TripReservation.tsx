@@ -21,7 +21,13 @@ interface TripReservationForm {
   endDate: Date | null;
 }
 
-const TripReservation = ({ tripId, maxGuests, tripStartDate, tripEndDate, pricePerDay }: TripReservationProps) => {
+const TripReservation = ({
+  tripId,
+  maxGuests,
+  tripStartDate,
+  tripEndDate,
+  pricePerDay,
+}: TripReservationProps) => {
   const {
     register,
     handleSubmit,
@@ -55,7 +61,23 @@ const TripReservation = ({ tripId, maxGuests, tripStartDate, tripEndDate, priceP
         message: "Esta data já está reservada.",
       });
     }
+
+    if (res?.error?.code === "INVALID_START_DATE") {
+      setError("startDate", {
+        type: "manual",
+        message: "Data Inválida.",
+      });
+    }
+
+    if (res?.error?.code === "INVALID_END_DATE") {
+      setError("endDate", {
+        type: "manual",
+        message: "Data Inválida.",
+      });
+    }
   };
+
+  
 
   const startDate = watch("startDate");
   const endDate = watch("endDate");
