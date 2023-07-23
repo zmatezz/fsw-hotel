@@ -8,6 +8,7 @@ import ReactCountryFlag from "react-country-flag";
 
 const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   const [trip, setTrip] = useState<Trip | null>();
+  const [totalPrice, setTotalPrice] = useState<number>(0);
 
   const searchParams = useSearchParams();
 
@@ -21,8 +22,10 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
           endDate: searchParams.get("endDate"),
         }),
       });
-      const { trip } = await response.json();
+      const { trip, totalPrice } = await response.json();
+
       setTrip(trip);
+      setTotalPrice(totalPrice);
     };
     fetchTrip();
   }, []);
@@ -58,6 +61,15 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
               </p>
             </div>
           </div>
+        </div>
+
+        <h3 className="font-semibold text-lg text-primaryDarker mt-3">
+          Informações sobre o preço
+        </h3>
+
+        <div className="flex justify-between">
+          <p className="font-medium text-primaryDarker">Total:</p>
+          <p>R${totalPrice}</p>
         </div>
       </div>
     </div>
