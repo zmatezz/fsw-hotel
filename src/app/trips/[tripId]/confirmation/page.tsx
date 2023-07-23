@@ -8,6 +8,8 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
 import ptBR from "date-fns/locale/pt-BR";
+import Button from "@/components/Button";
+
 
 const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   const [trip, setTrip] = useState<Trip | null>();
@@ -42,7 +44,7 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   const guests = searchParams.get("guests");
 
   return (
-    <div className="container mx-auto p-5">
+    <div className="container mx-auto p-5 h-screen">
       <h1 className="font-semibold text-xl text-primaryDarker">Sua viagem</h1>
 
       <div className="flex flex-col p-5 mt-5 border-grayLighter border-solid border shadow-lg rounded-lg">
@@ -89,6 +91,8 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
 
         <h3 className="font-semibold mt-5">Hóspedes</h3>
         <p>{guests}</p>
+
+        <Button className="mt-5">Finalizar Compra</Button>
       </div>
     </div>
   );
