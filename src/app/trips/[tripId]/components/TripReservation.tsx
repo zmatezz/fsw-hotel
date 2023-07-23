@@ -66,7 +66,7 @@ const TripReservation = ({
     }
 
     if (res?.error?.code === "INVALID_START_DATE") {
-      setError("startDate", {
+      return setError("startDate", {
         type: "manual",
         message: "Data Inválida.",
       });
