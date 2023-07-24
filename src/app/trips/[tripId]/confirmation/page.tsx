@@ -72,6 +72,8 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
       ),
     });
 
+    router.push("/");
+
     if (!res.ok) {
       return toast.error("Não foi possível realizar a reserva", {});
     }
