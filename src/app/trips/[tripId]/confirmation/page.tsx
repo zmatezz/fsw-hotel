@@ -42,7 +42,7 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
       router.push("/");
     }
     fetchTrip();
-  }, []);
+  }, [status]);
 
   console.log({ trip });
 
