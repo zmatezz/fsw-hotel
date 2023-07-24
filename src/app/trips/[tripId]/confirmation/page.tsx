@@ -9,11 +9,16 @@ import React, { useEffect, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
 import ptBR from "date-fns/locale/pt-BR";
 import Button from "@/components/Button";
-
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   const [trip, setTrip] = useState<Trip | null>();
   const [totalPrice, setTotalPrice] = useState<number>(0);
+
+  const router = useRouter();
+
+  const { status } = useSession();
 
   const searchParams = useSearchParams();
 
@@ -32,6 +37,10 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
       setTrip(trip);
       setTotalPrice(totalPrice);
     };
+
+    if (status === "unauthenticated") {
+      router.push("/");
+    }
     fetchTrip();
   }, []);
 
@@ -84,9 +93,9 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
       <div className="flex-flex col mt-5 text-primaryDarker">
         <h3 className="font-semibold">Data</h3>
         <div className="flex items-center gap-1 mt-1">
-        <p>{format(startDate, "dd 'de' MMMM", { locale: ptBR })}</p>
-        {" - "}
-        <p>{format(endDate, "dd 'de' MMMM", { locale: ptBR })}</p>
+          <p>{format(startDate, "dd 'de' MMMM", { locale: ptBR })}</p>
+          {" - "}
+          <p>{format(endDate, "dd 'de' MMMM", { locale: ptBR })}</p>
         </div>
 
         <h3 className="font-semibold mt-5">Hóspedes</h3>
