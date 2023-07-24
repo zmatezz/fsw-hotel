@@ -12,6 +12,7 @@ import Button from "@/components/Button";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import style from "styled-jsx/style";
+import { toast } from "react-toastify";
 
 const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   const [trip, setTrip] = useState<Trip | null>();
@@ -19,7 +20,9 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
 
   const router = useRouter();
 
-  const { status } = useSession();
+  const { status, data } = useSession();
+
+  console.log(data?.user);
 
   const searchParams = useSearchParams();
 
@@ -55,16 +58,26 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   if (!trip) return null;
 
   const handleBuyClick = async () => {
-    await fetch("http://localhost:3000/api/trips/reservation", {
+    const res = await fetch("http://localhost:3000/api/trips/reservation", {
       method: "POST",
       body: Buffer.from(
         JSON.stringify({
           tripId: params.tripId,
           startDate: searchParams.get("startDate"),
           endDate: searchParams.get("endDate"),
-          guests: searchParams.get("guests"),
+          guests: Number(searchParams.get("guests")),
+          userId: (data?.user as any)?.id!,
+          totalPaid: totalPrice,
         })
       ),
+    });
+
+    if (!res.ok) {
+      return toast.error("Não foi possível realizar a reserva", {});
+    }
+
+    toast.success("Reserva realizada com sucesso!", {
+      position: "bottom-center",
     });
   };
 
@@ -121,7 +134,9 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
         <h3 className="font-semibold mt-5">Hóspedes</h3>
         <p>{guests}</p>
 
-        <Button className="mt-5">Finalizar Compra</Button>
+        <Button className="mt-5" onClick={handleBuyClick}>
+          Finalizar Compra
+        </Button>
       </div>
     </div>
   );
