@@ -11,6 +11,7 @@ import ptBR from "date-fns/locale/pt-BR";
 import Button from "@/components/Button";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import style from "styled-jsx/style";
 
 const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   const [trip, setTrip] = useState<Trip | null>();
@@ -52,6 +53,20 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   console.log({ trip });
 
   if (!trip) return null;
+
+  const handleBuyClick = async () => {
+    await fetch("http://localhost:3000/api/trips/reservation", {
+      method: "POST",
+      body: Buffer.from(
+        JSON.stringify({
+          tripId: params.tripId,
+          startDate: searchParams.get("startDate"),
+          endDate: searchParams.get("endDate"),
+          guests: searchParams.get("guests"),
+        })
+      ),
+    });
+  };
 
   const startDate = new Date(searchParams.get("startDate") as string);
   const endDate = new Date(searchParams.get("endDate") as string);
