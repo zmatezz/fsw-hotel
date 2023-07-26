@@ -61,13 +61,17 @@ const UserReservationItem = ({ reservation }: UserReservationItemProps) => {
           <p className="text-sm">{reservation.guests}</p>
 
           <h3 className="font-semibold text-primaryDarker mt-3 pt-5 border-t border-solid border-grayLighter">
-          Informações sobre o preço
-        </h3>
+            Informações sobre o preço
+          </h3>
 
-        <div className="flex justify-between mt-1">
-          <p className="font-medium text-primaryDarker text-sm">Total:</p>
-          <p>R${Number(reservation.totalPaid)}</p>
-        </div>
+          <div className="flex justify-between mt-1">
+            <p className="font-medium text-primaryDarker text-sm mt-2">Total:</p>
+            <p>R${Number(reservation.totalPaid)}</p>
+          </div>
+
+          <Button variant="danger" className="mt-5">
+            Cancelar
+          </Button>
         </div>
       </div>
     </div>
