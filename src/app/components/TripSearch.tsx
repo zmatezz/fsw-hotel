@@ -38,7 +38,7 @@ const TripSearch = () => {
       <div className="flex flex-col gap-4 mt-5">
         <Input
           placeholder="Onde você quer ir?"
-          error={!!errors}
+          error={!!errors.text}
           errorMessage={errors.text?.message}
           {...register("text", {
             required: {
