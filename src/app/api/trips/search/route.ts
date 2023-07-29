@@ -27,7 +27,7 @@ const generateSearchQuery = (
     AND: [],
   };
 
-  if (startDate !== "undefined") {
+  if (startDate !== "undefined" && startDate !== "null") {
     searchQuery = {
       ...searchQuery,
       AND: [
@@ -42,7 +42,7 @@ const generateSearchQuery = (
     };
   }
 
-  if (budget !== "undefined") {
+  if (budget !== "undefined" && budget !== "null") {
     searchQuery = {
       ...searchQuery,
       AND: [
