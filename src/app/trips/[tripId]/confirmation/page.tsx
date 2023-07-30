@@ -58,7 +58,7 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   if (!trip) return null;
 
   const handleBuyClick = async () => {
-    const res = await fetch("http://localhost:3000/api/trips/reservation", {
+    const res = await fetch("http://localhost:3000/api/payment", {
       method: "POST",
       body: Buffer.from(
         JSON.stringify({
@@ -66,17 +66,25 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
           startDate: searchParams.get("startDate"),
           endDate: searchParams.get("endDate"),
           guests: Number(searchParams.get("guests")),
-          userId: (data?.user as any)?.id!,
-          totalPaid: totalPrice,
+          totalPrice,
+          coverImage: trip.coverImage,
+          name: trip.name,
+          description: trip.description,
         })
       ),
     });
 
-    router.push("/");
+    console.log({ res });
 
     if (!res.ok) {
       return toast.error("Não foi possível realizar a reserva", {});
     }
+
+    const response = await res.json();
+
+    console.log({ response });
+
+    /*     router.push("/"); */
 
     toast.success("Reserva realizada com sucesso!", {
       position: "bottom-center",
