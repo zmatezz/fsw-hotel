@@ -13,6 +13,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import style from "styled-jsx/style";
 import { toast } from "react-toastify";
+import { loadStripe } from "@stripe/stripe-js";
 
 const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   const [trip, setTrip] = useState<Trip | null>();
@@ -80,9 +81,15 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
       return toast.error("Não foi possível realizar a reserva", {});
     }
 
-    const response = await res.json();
+    const { sessionId } = await res.json();
 
-    console.log({ response });
+    const stripe = await loadStripe(
+      process.env.NEXT_PUBLIC_STRIPE_KEY as string
+    );
+
+    await stripe?.redirectToCheckout({
+      sessionId,
+    });
 
     /*     router.push("/"); */
 
