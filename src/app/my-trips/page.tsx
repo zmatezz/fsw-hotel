@@ -3,10 +3,11 @@
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Prisma, TripReservation } from "@prisma/client";
+import { Prisma } from "@prisma/client";
+import Link from "next/link";
+
 import UserReservationItem from "./components/UserReservationItem";
 import Button from "@/components/Button";
-import Link from "next/link";
 
 const MyTrips = () => {
   const [reservations, setReservations] = useState<
@@ -37,8 +38,6 @@ const MyTrips = () => {
     fetchReservations();
   }, [status]);
 
-  console.log({ reservations });
-
   return (
     <div className="container mx-auto p-5">
       <h1 className="font-semibold text-primaryDarker text-xl">
@@ -54,12 +53,12 @@ const MyTrips = () => {
         ))
       ) : (
         <div className="flex flex-col">
-          <p className="mt-5 font-medium text-prim">
-            Você ainda não tem nenhuma reserva! =({" "}
+          <p className="mt-2 font-medium text-primaryDarker">
+            Você ainda não tem nenhuma reserva! =(
           </p>
 
           <Link href="/">
-            <Button className="w-full mt-2">Fazer reserva!</Button>
+            <Button className="w-full mt-2">Fazer reserva</Button>
           </Link>
         </div>
       )}
@@ -68,3 +67,4 @@ const MyTrips = () => {
 };
 
 export default MyTrips;
+    
