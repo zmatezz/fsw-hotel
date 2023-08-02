@@ -26,7 +26,11 @@ const TripSearch = () => {
   } = useForm<TripSearchForm>();
 
   const onSubmit = (data: TripSearchForm) => {
-    router.push(`/trips/search?text=${data.text}&startDate=${data.startDate?.toISOString()}&budget=${data.budget}`);
+    router.push(
+      `/trips/search?text=${
+        data.text
+      }&startDate=${data.startDate?.toISOString()}&budget=${data.budget}`
+    );
   };
 
   return (
@@ -78,7 +82,12 @@ const TripSearch = () => {
           />
         </div>
 
-        <Button onClick={() => handleSubmit(onSubmit)()} className="w-1/2">Buscar</Button>
+        <Button
+          onClick={() => handleSubmit(onSubmit)()}
+          className="w-1/2 lg:h-fit"
+        >
+          Buscar
+        </Button>
       </div>
     </div>
   );
